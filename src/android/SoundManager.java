@@ -1,4 +1,4 @@
-package com.kindara.android.notificationsounds;
+package com.kindara.android.soundmanager;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
