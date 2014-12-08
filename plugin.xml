@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="com.kindara.android.notificationsounds" version="0.0.1">
+
+	<name>SoundManager</name>
+	<description>A plugin to choose notification sounds</description>
+		<license>Kindara</license>
+	<keywords>cordova, notification, sounds</keywords>
+
+	<js-module src="www/ringtones.js" name="ringtones">
+		<clobbers target="navigator.ringtones" />
+	</js-module>
+
+	<!-- android -->
+	<platform name="android">
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="SoundManager">
+				<param name="android-package" value="com.kindara.android.notificationsounds.SoundManager"/>
+			</feature>
+		</config-file>
+	
+		<source-file src="src/android/SoundManager.java" target-dir="src/com/kindara/android/notificationsounds" />
+	</platform>
+</plugin>
+
+
+
+
+
+
