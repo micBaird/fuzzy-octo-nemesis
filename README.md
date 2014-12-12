@@ -93,7 +93,7 @@ navigator.ringtones.find(
 );
 ```
 
-### Using the user-selected sound URI in combination with [local notifications][https://github.com/katzer/cordova-plugin-local-notifications]
+### Using the user-selected sound URI in combination with [local-notifications][local-notifications]
 - You must include the local-nofications cordova plugin to excute this example.
 ```javascript
 navigator.ringtones.find(
@@ -131,4 +131,5 @@ This software is released under the [Apache 2.0 License][apache2_license].
 [PGB]: http://docs.build.phonegap.com/en_US/3.3.0/index.html
 [PGB_plugin]: https://build.phonegap.com/plugins/413
 [apache_device_plugin]: https://github.com/apache/cordova-plugin-device
+[local-notifcations]: https://github.com/katzer/cordova-plugin-local-notifications
 [find]: #prompt-user-to-select-sound
