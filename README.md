@@ -94,7 +94,7 @@ The method takes a function (resultCallback) as an argument to specify the event
 
 ```javascript
 navigator.ringtones.findNotificationSounds(
-  function () { ... },   // A function that is executed in the success of a selected ringtone
+  function () { ... },   // A function that is executed in the success of a selected notification sound
   function () { ... }    // A function that is executed in the failure of a selected sound
 );
 ```
