@@ -4,11 +4,15 @@ Cordova Android Sound Manager Plugin
 The purpose of sound manager is to enable an Android application to allow its users to choose a sound that they want to occur in the result of an  event. For example, the plugin will allow a user to choose the sound they want to occur for a specific notification.
 
 ### How it appears to the user
-Users will be prompted by the native Android sound-picker to select a sound.
+Users will be prompted by the native Android [ACTION_RINGTONE_PICKER][android_RingtoneManager] to select a sound.
 
 ### Examples of Sound Usage
-Sounds are ideally suited for applications with events that are customizable by the user, such as calendar and to-do list applications, or any application that triggers an alert to the user.
-For example, if applications are presenting a notification to inform their users of an event, the user can choose a specific sound to associate with that application's notifications. A sound that is made specifically for the application can also be used.
+Sounds are ideally suited for applications with events that are customizable by the user, such as calendar and to-do list applications, or any application that triggers an alert to the user to complete an action immediately.
+
+For example, if an application is presenting a notification to inform their user of an event, the user can select a specific notification sound to associate with the application's notifications. If an application is triggering an event to remind the user to do something immediately, the user can also be prompted to select a ringtone that will play until the notification is addressed.
+
+A sound that is customized by the application can also be selected by the user.
+
 
 ### Plugin's Purpose
 The purpose of the plugin is to create a platform independent javascript interface for [Cordova][cordova] based Android applications to access the specific API for Android.
@@ -53,11 +57,16 @@ Add the following xml to your config.xml to always use the latest version of thi
 More informations can be found [here][PGB_plugin].
 
 ## ChangeLog
+#### Version 0.3.0
+- added ability to select ringtone or notification sounds separately
+
 #### Version 0.2.0
 - initial release
 
+
 ## Using the plugin
-1. [navigator.ringtones.find][find]
+1. [navigator.ringtones.findRingtones][findRT]
+2. [navigator.ringtones.findNotificationSounds][findNS]
 
 ### Plugin initialization
 The plugin and its methods are not available before the *deviceready* event has been fired.
@@ -68,13 +77,24 @@ document.addEventListener('deviceready', function () {
 }, false);
 ```
 
-### Prompt user to select sound
-Users can be prompted to select a sound through the 'navigator.ringtones.find' interface.<br>
+### Prompt user to select ringtone
+Users can be prompted to select a ringtone that will play continuously until notification is checked through the 'navigator.ringtones.findRingtones' interface.<br>
 The method takes a function (resultCallback) as an argument to specify the event that occurs after the user has selected a ringtone as well as another function (failureCallback) that is triggered in the event that an error occurs.
 
 ```javascript
-navigator.ringtones.find(
-  function () { ... },   // A function that is executed in the success of a selected sound
+navigator.ringtones.findRingtone(
+  function () { ... },   // A function that is executed in the success of a selected ringtone
+  function () { ... }    // A function that is executed in the failure of a selected sound
+);
+```
+
+### Prompt user to select notification sound
+Users can be prompted to select a notification sound that will play once when the notification is triggered by implementing the 'navigator.ringtones.findNotificationSounds' interface.<br>
+The method takes a function (resultCallback) as an argument to specify the event that occurs after the user has selected a ringtone as well as another function (failureCallback) that is triggered in the event that an error occurs.
+
+```javascript
+navigator.ringtones.findNotificationSounds(
+  function () { ... },   // A function that is executed in the success of a selected ringtone
   function () { ... }    // A function that is executed in the failure of a selected sound
 );
 ```
@@ -83,7 +103,17 @@ navigator.ringtones.find(
 ## Examples
 ### Returning the user-selected sound URI
 ```javascript
-navigator.ringtones.find(
+navigator.ringtones.findRingtones(
+  function(sound_URI) {
+    console.log(sound_URI);
+  },
+  function (message) {
+    console.log(message);
+  }
+);
+```
+```javascript
+navigator.ringtones.findNotificationSounds(
   function(sound_URI) {
     console.log(sound_URI);
   },
@@ -96,7 +126,7 @@ navigator.ringtones.find(
 ### Using the user-selected sound URI in combination with [local-notifications][local_notifications]
 - You must include the local-nofications cordova plugin to excute this example.
 ```javascript
-navigator.ringtones.find(
+navigator.ringtones.findRingtones(
   function (sound_URI) {
     console.log(sound_URI);
     window.plugin.notification.local.add({ 
@@ -109,7 +139,20 @@ navigator.ringtones.find(
   }
 );
 ```
-
+```javascript
+navigator.ringtones.findNotificationSounds(
+  function (sound_URI) {
+    console.log(sound_URI);
+    window.plugin.notification.local.add({ 
+      message: 'Great app!',
+      sound: sound_URI 
+    });
+  },
+  function (message) {
+    console.log(message);        
+  }
+);
+```
 
 ## Contributing
 
@@ -128,13 +171,15 @@ Written by [Michelle Baird][michelle_linkedIn]
 © 2014-2015 [Kindara, Inc.][kindara_home] All rights reserved
 
 
+[android_RingtoneManager]: http://developer.android.com/reference/android/media/RingtoneManager.html
 [cordova]: https://cordova.apache.org
 [CLI]: http://cordova.apache.org/docs/en/3.0.0/guide_cli_index.md.html#The%20Command-line%20Interface
 [PGB]: http://docs.build.phonegap.com/en_US/3.3.0/index.html
 [PGB_plugin]: https://build.phonegap.com/plugins/413
 [apache_device_plugin]: https://github.com/apache/cordova-plugin-device
 [local_notifications]: https://github.com/katzer/cordova-plugin-local-notifications
-[find]: #prompt-user-to-select-sound
+[findRT]: #prompt-user-to-select-ringtone
+[findNS]: #prompt-user-to-select-notification-sound
 [apache2_license]: http://opensource.org/licenses/Apache-2.0
 [kindara_home]: https://www.kindara.com/home
 [michelle_linkedIn]: www.linkedin.com/in/micBaird
