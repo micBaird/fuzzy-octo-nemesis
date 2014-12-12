@@ -70,7 +70,8 @@ public class SoundManager extends CordovaPlugin {
 				ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
 				ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
 				ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,RingtoneManager.TYPE_NOTIFICATION);
-				
+				ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,RingtoneManager.TYPE_RINGTONE);
+
 				plugin.cordova.startActivityForResult(plugin, ringtonePickerIntent, RINGTONE_PICKER_RESULT);
 			}
 		};
