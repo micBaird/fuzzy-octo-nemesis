@@ -129,5 +129,6 @@ This software is released under the [Apache 2.0 License][apache2_license].
 [cordova]: https://cordova.apache.org
 [CLI]: http://cordova.apache.org/docs/en/3.0.0/guide_cli_index.md.html#The%20Command-line%20Interface
 [PGB]: http://docs.build.phonegap.com/en_US/3.3.0/index.html
+[PGB_plugin]: https://build.phonegap.com/plugins/413
 [apache_device_plugin]: https://github.com/apache/cordova-plugin-device
 [find]: #prompt-user-to-select-sound
