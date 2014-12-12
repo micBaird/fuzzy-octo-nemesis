@@ -14,10 +14,11 @@ import android.database.Cursor;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.util.Log;
+
 /**
- * This plugin provides access to the ringtone options on the device by
- * utilizing the Android RingtoneManager in order to select a ringtone sound
- * and deliver the selected sound's URI.
+ * This plugin provides access to the sound options on the device by
+ * utilizing the Android RingtoneManager in order to select a ringtone
+ * or notification sound and deliver the selected sound's URI.
  */
 
 public class SoundManager extends CordovaPlugin {
@@ -49,6 +50,9 @@ public class SoundManager extends CordovaPlugin {
 		if (action.equals("pickRingtone")) {
 			this.pickRingtone();
 		}
+		else if (action.equals("pickNotificationSound")) {
+			this.pickNotificationSound();
+		}
 		else {
 			return false;
 
@@ -58,7 +62,7 @@ public class SoundManager extends CordovaPlugin {
 	}
 
 	/**
-	 * Launches the RingtoneManager Ringtone Picker to select a ringtone.
+	 * Launches the RingtoneManager Ringtone-Picker to select a ringtone.
 	 */
 	private void pickRingtone() {
 
@@ -66,21 +70,38 @@ public class SoundManager extends CordovaPlugin {
 		Runnable worker = new Runnable() {
 			public void run() {
 				Intent ringtonePickerIntent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
-				ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select ringtone for notifications:");
+				ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select a ringtone:");
 				ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
 				ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
-				ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,RingtoneManager.TYPE_NOTIFICATION);
 				ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,RingtoneManager.TYPE_RINGTONE);
-
+				
 				plugin.cordova.startActivityForResult(plugin, ringtonePickerIntent, RINGTONE_PICKER_RESULT);
 			}
 		};
 		this.cordova.getThreadPool().execute(worker);
 
 	}
+	/**
+	 * Launches the RingtoneManager Ringtone-Picker to select a notification sound.
+	 */
+	private void pickNotificationSound() {
+		final CordovaPlugin plugin = (CordovaPlugin) this;
+		Runnable worker = new Runnable() {
+			public void run() {
+				Intent ringtonePickerIntent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+				ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select a notification sound:");
+				ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
+				ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
+				ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,RingtoneManager.TYPE_NOTIFICATION);
+				
+				plugin.cordova.startActivityForResult(plugin, ringtonePickerIntent, RINGTONE_PICKER_RESULT);
+			}
+		};
+		this.cordova.getThreadPool().execute(worker);
+	}
 
 	/**
-	 * Called when user needs to pick a ringtone.
+	 * Called when user needs to pick a sound.
 	 */
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, final Intent intent) {
@@ -98,7 +119,7 @@ public class SoundManager extends CordovaPlugin {
 					return;
 				}
 				else {
-					this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "No ringtone path!"));
+					this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "No sound path!"));
 					return;
 				}
 				
