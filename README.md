@@ -123,7 +123,8 @@ navigator.ringtones.find(
 
 This software is released under the [Apache 2.0 License][apache2_license].
 
-© 2014-2015 Kindara, Inc. All rights reserved
+Written by [Michelle Baird][michelle_linkedIn]
+© 2014-2015 [Kindara, Inc.][kindara_home] All rights reserved
 
 
 [cordova]: https://cordova.apache.org
@@ -133,3 +134,6 @@ This software is released under the [Apache 2.0 License][apache2_license].
 [apache_device_plugin]: https://github.com/apache/cordova-plugin-device
 [local_notifications]: https://github.com/katzer/cordova-plugin-local-notifications
 [find]: #prompt-user-to-select-sound
+[apache2_license]: http://opensource.org/licenses/Apache-2.0
+[kindara_home]: https://www.kindara.com/home
+[michelle_linkedIn]: www.linkedin.com/in/micBaird
