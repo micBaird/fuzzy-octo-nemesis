@@ -33,17 +33,17 @@ The plugin can either be installed into the local development environment or clo
 
 ### Adding the Plugin to your project
 Through the [Command-line Interface][CLI]:
-'''bash
+```bash
 #~~ from master ~~
 cordova plugin add https://github.com/micBaird/fuzzy-octo-nemesis.git && cordova prepare
-'''
+```
 
 ### Removing the Plugin from your project
 Through the [Command-line Interface][CLI]:
-'''bash
+```bash
 #~~ from master ~~
 cordova plugin rm https://github.com/micBaird/fuzzy-octo-nemesis.git
-'''
+```
 
 ### PhoneGap Build
 Add the following xml to your config.xml to always use the latest version of this plugin:
