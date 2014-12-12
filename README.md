@@ -124,6 +124,7 @@ navigator.ringtones.find(
 This software is released under the [Apache 2.0 License][apache2_license].
 
 Written by [Michelle Baird][michelle_linkedIn]
+
 © 2014-2015 [Kindara, Inc.][kindara_home] All rights reserved
 
 
