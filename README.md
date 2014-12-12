@@ -62,7 +62,7 @@ More informations can be found [here][PGB_plugin].
 ### Plugin initialization
 The plugin and its methods are not available before the *deviceready* event has been fired.
 
-'''javascript
+```javascript
 document.addEventListener('deviceready', function () {
     // navigator.ringtones is now available
 }, false);
@@ -72,17 +72,17 @@ document.addEventListener('deviceready', function () {
 Users can be prompted to select a sound through the 'navigator.ringtones.find' interface.<br>
 The method takes a function (resultCallback) as an argument to specify the event that occurs after the user has selected a ringtone as well as another function (failureCallback) that is triggered in the event that an error occurs.
 
-'''javascript
+```javascript
 navigator.ringtones.find(
   function () { ... },   // A function that is executed in the success of a selected sound
   function () { ... }    // A function that is executed in the failure of a selected sound
 );
-'''
+```
 
 
 ## Examples
 ### Returning the user-selected sound URI
-'''javascript
+```javascript
 navigator.ringtones.find(
   function(sound_URI) {
     console.log(sound_URI);
@@ -91,11 +91,11 @@ navigator.ringtones.find(
     console.log(message);
   }
 );
-'''
+```
 
 ### Using the user-selected sound URI in combination with [local notifications][https://github.com/katzer/cordova-plugin-local-notifications]
 - You must include the local-nofications cordova plugin to excute this example.
-'''javascript
+```javascript
 navigator.ringtones.find(
   function (sound_URI) {
     console.log(sound_URI);
@@ -108,7 +108,7 @@ navigator.ringtones.find(
     console.log(message);        
   }
 );
-'''
+```
 
 
 ## Contributing
